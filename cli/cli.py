@@ -1,5 +1,6 @@
 import os
 import time
+from cli import logo
 
 def run(api):
     def show_games():
@@ -13,11 +14,12 @@ def run(api):
 
     while True:
         os.system("cls" if os.name == "nt" else "clear")
+        print(logo.logo())
         print("Game Shell")
         print("1. Launch")
         print("2. Remove game")
         print("3. Add Game")
-        print("4. soon")
+        print("4. Edit Game")
         print("Q. Exit")
         choose = input("Choose: ")
 
@@ -44,6 +46,20 @@ def run(api):
             game_path = input("Enter Game Path/ID: ")
 
             api.add_games(g=game_name, s=game_source, p=game_path)
+        
+        elif choose == "4":
+            games = show_games()
+            choice = int(input("Enter game no.: "))
+            g_name = games[choice - 1]
+            old_name = g_name["name"]
+            new_name = input("Enter Game name: ")
+            new_path = input("Enter new path/id: ")
+
+            try:
+                api.edit_games(old_name, new_name, new_path)
+            except Exception as e:
+                print(e)
+            
 
         elif choose.upper() == "Q":
             break

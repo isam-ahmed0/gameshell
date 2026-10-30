@@ -33,6 +33,22 @@ def remove_game(game_name):
     games[:] = [g for g in games if g["name"] != game_name]
     save_games(games)
 
+def edit_games(old_name, new_name=None, new_path=None):
+    games = load_games()
+    for game in games:
+        if game["name"] == old_name:
+            if new_name:
+                game["name"] = new_name
+            if new_path:
+                game["path"] = new_path
+            # if new_name and new_path:
+                # game["name"] = new_name
+                # game["path"] = new_path
+        
+        save_games(games)
+
+
+
 # gamess = add_games(g="Don't Starve", s="steam", p="219740")
 # print(gamess)
 # add_games(g="Don't Starve", s="steam", p="219740")
