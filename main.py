@@ -5,7 +5,8 @@ import threading
 from core import api
 from pypresence import Presence
 from pypresence.types import ActivityType
-from cli import cli
+from cli import app as cli
+from core import gui_loader
 from gui_qt import gui
 
 def rpc():
@@ -30,3 +31,4 @@ rpc_thread.start()
 
 # gui.run_gui(api)
 cli.run(api)
+#gui_loader.run(api, "/home/isam/Projects/learn-python/test.py")
