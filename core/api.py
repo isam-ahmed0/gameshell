@@ -8,6 +8,8 @@ import json
 import webbrowser
 import subprocess
 
+from pathlib import Path
+
 
 def identify_os():
     os_name = platform.system()
@@ -27,6 +29,7 @@ def launch(g):
             env["STEAM_COMPAT_DATA_PATH"] = prefix
             env["STEAM_COMPAT_CLIENT_INSTALL_PATH"] = os.path.expanduser("~/.steam/steam")
 
+            # WAIT, THIS IS FOR NVIDIA WITH AN INTEGRETED GPU. YOU SHOULD REMOVE OR EDIT.
             env["__NV_PRIME_RENDER_OFFLOAD"] = "1"
             env["__GLX_VENDOR_LIBRARY_NAME"] = "nvidia"
             env["__VK_LAYER_NV_optimus"] = "NVIDIA_only"
@@ -37,17 +40,44 @@ def launch(g):
             subprocess.Popen(g["path"])
     elif source == "crossflatform":
         subprocess.Popen(g["path"])
+    else:
+        pass
 
         
     # subprocess.Popen(g["path"])
 
+def games_json():
+    os_name = identify_os()
+    if os_name == "Linux":
+        config_dir = Path.home() / ".config" / "gameshell"
+    elif os_name == "Windows":
+        config_dir = Path(os.getenv("APPDATA")) / "gameshell"
+    
+    config_dir.mkdir(parents=True, exist_ok=True)
+
+    games_file = config_dir / "games.json"
+
+    return games_file 
+
 def load_games():
-    with open("games.json", "r") as f:
-        return json.load(f)
+    game_list = games_json()
+    if not game_list.exists():
+        Path("example.json").copy(game_list)
+    try:
+        with open(game_list, "r") as f:
+            return json.load(f)
+    except Exception as e:
+        return(e)
 
 def save_games(games_list):
-    with open("games.json", "w") as f:
-        json.dump(games_list, f, indent=4)
+    game_list = games_json()
+    if not game_list.exists():
+        game_list.touch()
+    try:
+        with open(game_list, "w") as f:
+            json.dump(games_list, f, indent=4)
+    except Exception as e:
+        return(e)
 
 def add_games(g, s, p, proton=None, prefix=None):
     games = load_games()

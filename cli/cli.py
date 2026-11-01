@@ -6,6 +6,7 @@ def run(api):
     def show_games():
         print("Choose game")
         games = api.load_games()
+
         for i, game in enumerate(games, start=1):
             print(f"[{i}]. {game["name"]}")
         return games
@@ -28,6 +29,9 @@ def run(api):
             # show_games()
             games = show_games()
             choice = int(input("Enter game no.: "))
+            # if choice == "" or " " or str:
+                # print(f"{choose} is invalid")
+                # choice = input("Enter to continue")
             try:
                 api.launch(games[choice - 1])
             except Exception as e:
@@ -47,14 +51,13 @@ def run(api):
             game_path = input("Enter Game Path/ID: ")
 
             os_name = api.identify_os()
-            if os_name == "Linux":
+            if os_name == "Linux" and game_source == "exe":
                 proton = input("Enter proton path: ")
                 prefix = input("Enter Prefix path: ")
                 api.add_games(g=game_name, s=game_source, p=game_path, proton=proton, prefix=prefix)
             else:
                 api.add_games(g=game_name, s=game_source, p=game_path)
 
-            
         
         elif choose == "4":
             games = show_games()

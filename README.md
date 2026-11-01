@@ -9,22 +9,22 @@ Im a beginner too.
 ### Core
 It uses core/api
 
-``api.launch(g)``
+``api.launch(g)`` [g is game]
 
 ``api.laod_games()``
 
-``api.add_games(g, s, p)``
+``add_games(g, s, p, proton=None, prefix=None)`` [s is source and p is path.] [proton and prefix are linux only]
 
 ``api.save_games(games_list)``
 
 ``api.remove_game(game_name)``
 
-``api.edit_games(old_name, new_name=None, new_path=None)``
+``api.edit_games(old_name, new_name=None, new_path=None)`` [Proton edit and prefix edit will be added soon.]
 
 ### Interface
 You can make your own GUi or CLI.
 
-PySide6, TKinter, CustomTKinter or any gui support
+PySide6, TKinter, CustomTKinter, Web base(django, fastapi), kivy or any gui support
 
 Example
 ``def run(api):``
