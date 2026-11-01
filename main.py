@@ -8,7 +8,7 @@ from pypresence import Presence
 from pypresence.types import ActivityType
 from cli import app as cli
 from core import gui_loader
-from gui_qt import gui
+# from gui_qt import gui
 
 parser = argparse.ArgumentParser(
                     prog='Game Shell',

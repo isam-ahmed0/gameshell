@@ -29,9 +29,11 @@ PySide6, TKinter, CustomTKinter, Web base(django, fastapi), kivy or any gui supp
 Example
 ``def run(api):``
 
+it supports --ui or -ui for loading custom ui.
+
 
 ### Conclusion
-Also It has and Example GUI/CLI
+Also It has some Example GUI/CLI
 
 no ai. I writed myself
 
