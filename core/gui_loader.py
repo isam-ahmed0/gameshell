@@ -21,6 +21,13 @@ def run(api, path):
         module_name = os.path.basename(path).replace(".py", "")
     spec = importlib.util.spec_from_file_location(module_name, module_path)
     gui = importlib.util.module_from_spec(spec)
+
+    og_dir = os.getcwd()
+    gui_dir = path if os.path.isdir(path) else os.path.dirname(path)
+    os.chdir(gui_dir)
+
     spec.loader.exec_module(gui)
 
     gui.run(api)
+
+    os.chdir(og_dir)
