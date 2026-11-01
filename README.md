@@ -27,7 +27,7 @@ You can make your own GUi or CLI.
 PySide6, TKinter, CustomTKinter or any gui support
 
 Example
-``def run_gui(api):``
+``def run(api):``
 
 
 ### Conclusion

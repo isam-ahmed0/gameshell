@@ -18,5 +18,12 @@
         "name": "DARK SOULS: REMASTERED",
         "source": "steam",
         "path": "570940"
+    },
+    {
+        "name": "Among Us",
+        "source": "exe",
+        "path": "/home/isam/g0/app/Among Us.exe",
+        "proton": "/home/isam/.local/share/Steam/compatibilitytools.d/GE-Proton11-11-x86_64/proton",
+        "prefix": "/home/isam/.wine"
     }
 ]

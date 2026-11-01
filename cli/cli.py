@@ -9,8 +9,9 @@ def run(api):
         for i, game in enumerate(games, start=1):
             print(f"[{i}]. {game["name"]}")
         return games
-    def list():
-        pass
+    
+    def clear():
+        os.system("cls" if os.name == "nt" else "clear")
 
     while True:
         os.system("cls" if os.name == "nt" else "clear")
@@ -42,10 +43,18 @@ def run(api):
         elif choose == "3":
             games = api.load_games()
             game_name = input("Enter Game name: ")
-            game_source = input("Enter Game source (e.g.: steam): ")
+            game_source = input("Enter Game source (e.g.: steam, exe, crosspaltform): ")
             game_path = input("Enter Game Path/ID: ")
 
-            api.add_games(g=game_name, s=game_source, p=game_path)
+            os_name = api.identify_os()
+            if os_name == "Linux":
+                proton = input("Enter proton path: ")
+                prefix = input("Enter Prefix path: ")
+                api.add_games(g=game_name, s=game_source, p=game_path, proton=proton, prefix=prefix)
+            else:
+                api.add_games(g=game_name, s=game_source, p=game_path)
+
+            
         
         elif choose == "4":
             games = show_games()
