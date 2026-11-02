@@ -22,6 +22,7 @@ def run(api):
         print("2. Remove game")
         print("3. Add Game")
         print("4. Edit Game")
+        print("5. Share")
         print("Q. Exit")
         choose = input("Choose: ")
 
@@ -71,6 +72,14 @@ def run(api):
                 api.edit_games(old_name, new_name, new_path)
             except Exception as e:
                 print(e)
+        
+        elif choose == "5":
+            games = show_games()
+            choice = int(input("Enter game no.: "))
+            g_name = games[choice - 1]
+
+            api.share(g_name)
+
             
 
         elif choose.upper() == "Q":

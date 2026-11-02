@@ -5,6 +5,7 @@ import time
 import asyncio
 # import config
 import json
+from PIL import Image, ImageDraw, ImageFont
 import webbrowser
 import subprocess
 
@@ -38,7 +39,7 @@ def launch(g):
 
         elif os_name == "Windows":
             subprocess.Popen(g["path"])
-    elif source == "crossflatform":
+    elif source == "crossplatform":
         subprocess.Popen(g["path"])
     else:
         pass
@@ -102,9 +103,22 @@ def edit_games(old_name, new_name=None, new_path=None):
                 # game["path"] = new_path
         save_games(games)
 
+def share(g):
+    W, X = 800, 400
+    img = Image.new("RGB", (W, X), color="white")
+    game = g["name"]
+    draw = ImageDraw.Draw(img)
+    ont = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 60)
+    draw.text((W/2, 150), game, fill="black", font=ont, stroke_width=1, anchor="mm")
+    draw.text((W/2, 200), "Play with Game Shell", fill="black", anchor="mm")
+    img.show()
+
+
 # Tests before using api.
 
 # print(identify_os())
 # gamess = add_games(g="Don't Starve", s="steam", p="219740")
 # print(gamess)
 # add_games(g="Don't Starve", s="steam", p="219740")
+
+# share()
